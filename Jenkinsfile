@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Ensure that we are using the correct Git installation
-                git url: 'https://github.com/shakilmunavary/AI-Powered-Jenkins-BuildFailure-Management', branch: 'master'
+                git url: 'https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins', branch: 'main'
             }
         }
 
