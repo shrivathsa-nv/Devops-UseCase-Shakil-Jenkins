@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    envronment {
+    environment {
         TOMCAT_WEBAPPS_DIR = '/opt/tomcat/webapps'
     }
 
