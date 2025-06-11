@@ -10,7 +10,7 @@ pipeline {
             steps {
                 // Ensure that we are using the correct Git installation
                 git url: 'https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins', branch: 'main'
-                //checkout scm
+
             }
         }
 
@@ -33,7 +33,6 @@ pipeline {
 
     post {
         always {
-            // Clean up the workspace
             cleanWs()
         }
     }
