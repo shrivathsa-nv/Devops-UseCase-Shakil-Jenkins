@@ -14,7 +14,7 @@ stages:
     steps:
     - script: |
         echo "Cloning the repository..."
-        git clone https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins.git .
+        #git clone https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins.git .
       displayName: 'Clone Repository'
 
 - stage: BuildWithMaven
