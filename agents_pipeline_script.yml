@@ -1,0 +1,45 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  TOMCAT_WEBAPPS_DIR: '/opt/tomcat/webapps'
+
+stages:
+- stage: CloneRepository
+  jobs:
+  - job: CloneRepo
+    steps:
+    - script: |
+        echo "Cloning the repository..."
+        git clone https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins.git .
+      displayName: 'Clone Repository'
+
+- stage: BuildWithMaven
+  jobs:
+  - job: Build
+    steps:
+    - script: |
+        echo "Building the application..."
+        mvn clean package
+      displayName: 'Build with Maven'
+
+- stage: Deploy
+  jobs:
+  - job: Deployment
+    steps:
+    - script: |
+        echo "Deploying the application..."
+        sudo cp target/java-tomcat-maven-example.war $TOMCAT_WEBAPPS_DIR/
+      displayName: 'Deploy'
+
+- stage: PostCleanup
+  jobs:
+  - job: Cleanup
+    steps:
+    - script: |
+        echo "Cleaning the workspace..."
+        rm -rf $(Agent.BuildDirectory)
+      displayName: 'Clean Workspace'
