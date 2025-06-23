@@ -32,7 +32,7 @@ stages:
     steps:
     - script: |
         echo "Deploying the application..."
-        sudo cp target/java-tomcat-maven-example.war $TOMCAT_WEBAPPS_DIR/
+        sudo cp target/java-tomcat-maven-example.war $(TOMCAT_WEBAPPS_DIR)/
       displayName: 'Deploy'
 
 - stage: PostCleanup
