@@ -12,12 +12,14 @@ stages:
   jobs:
   - job: Build
     steps:
+    - checkout: self
     - script: |
         echo "Building the application with Maven..."
         mvn clean package
       displayName: 'Build with Maven'
 
 - stage: Deploy
+  dependsOn: BuildWithMaven
   jobs:
   - job: DeployApplication
     steps:
@@ -27,6 +29,7 @@ stages:
       displayName: 'Deploy Application'
 
 - stage: PostCleanup
+  dependsOn: Deploy
   jobs:
   - job: CleanupWorkspace
     steps:
