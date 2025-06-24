@@ -8,38 +8,29 @@ variables:
   TOMCAT_WEBAPPS_DIR: '/opt/tomcat/webapps'
 
 stages:
-- stage: CloneRepository
-  jobs:
-  - job: CloneRepo
-    steps:
-    - script: |
-        echo "Cloning the repository..."
-        #git clone https://github.com/shrivathsa-nv/Devops-UseCase-Shakil-Jenkins.git .
-      displayName: 'Clone Repository'
-
 - stage: BuildWithMaven
   jobs:
   - job: Build
     steps:
     - script: |
-        echo "Building the application..."
+        echo "Building the application with Maven..."
         mvn clean package
       displayName: 'Build with Maven'
 
 - stage: Deploy
   jobs:
-  - job: Deployment
+  - job: DeployApplication
     steps:
     - script: |
-        echo "Deploying the application..."
-        sudo cp target/java-tomcat-maven-example.war $(TOMCAT_WEBAPPS_DIR)/
-      displayName: 'Deploy'
+        echo "Deploying the application to Tomcat server..."
+        sudo cp target/java-tomcat-maven-example.war ${TOMCAT_WEBAPPS_DIR}/
+      displayName: 'Deploy Application'
 
 - stage: PostCleanup
   jobs:
-  - job: Cleanup
+  - job: CleanupWorkspace
     steps:
     - script: |
-        echo "Cleaning the workspace..."
+        echo "Cleaning up workspace..."
         rm -rf $(Agent.BuildDirectory)
       displayName: 'Clean Workspace'
